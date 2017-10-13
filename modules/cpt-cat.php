@@ -25,6 +25,7 @@ class Rkkr_Cpt_Cat {
 		add_action( 'init', array( $this, 'setup_post_type' ) );
 
 
+		add_action( 'init', array( $this, 'prepopulate_cat_taxonomies' ) );
 	}
 
 
@@ -255,12 +256,12 @@ class Rkkr_Cpt_Cat {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 20,
-			'menu_icon'           => 'data:image/svg+xml;base64,' . base64_encode( '<svg  xmlns="http://www.w3.org/2000/svg"><path  fill="black" d="M844 472q0 60-19 113.5t-63 92.5-105 39q-76 0-138-57.5t-92-135.5-30-151q0-60 19-113.5t63-92.5 105-39q77 0 138.5 57.5t91.5 135 30 151.5zm-342 483q0 80-42 139t-119 59q-76 0-141.5-55.5t-100.5-133.5-35-152q0-80 42-139.5t119-59.5q76 0 141.5 55.5t100.5 134 35 152.5zm394-27q118 0 255 97.5t229 237 92 254.5q0 46-17 76.5t-48.5 45-64.5 20-76 5.5q-68 0-187.5-45t-182.5-45q-66 0-192.5 44.5t-200.5 44.5q-183 0-183-146 0-86 56-191.5t139.5-192.5 187.5-146 193-59zm239-211q-61 0-105-39t-63-92.5-19-113.5q0-74 30-151.5t91.5-135 138.5-57.5q61 0 105 39t63 92.5 19 113.5q0 73-30 151t-92 135.5-138 57.5zm432-104q77 0 119 59.5t42 139.5q0 74-35 152t-100.5 133.5-141.5 55.5q-77 0-119-59t-42-139q0-74 35-152.5t100.5-134 141.5-55.5z"/></svg>' ),
+			'menu_icon'           => 'data:image/svg+xml;base64,' . base64_encode( '<svg  width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path  fill="black" d="M844 472q0 60-19 113.5t-63 92.5-105 39q-76 0-138-57.5t-92-135.5-30-151q0-60 19-113.5t63-92.5 105-39q77 0 138.5 57.5t91.5 135 30 151.5zm-342 483q0 80-42 139t-119 59q-76 0-141.5-55.5t-100.5-133.5-35-152q0-80 42-139.5t119-59.5q76 0 141.5 55.5t100.5 134 35 152.5zm394-27q118 0 255 97.5t229 237 92 254.5q0 46-17 76.5t-48.5 45-64.5 20-76 5.5q-68 0-187.5-45t-182.5-45q-66 0-192.5 44.5t-200.5 44.5q-183 0-183-146 0-86 56-191.5t139.5-192.5 187.5-146 193-59zm239-211q-61 0-105-39t-63-92.5-19-113.5q0-74 30-151.5t91.5-135 138.5-57.5q61 0 105 39t63 92.5 19 113.5q0 73-30 151t-92 135.5-138 57.5zm432-104q77 0 119 59.5t42 139.5q0 74-35 152t-100.5 133.5-141.5 55.5q-77 0-119-59t-42-139q0-74 35-152.5t100.5-134 141.5-55.5z"/></svg>' ),
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
 			'has_archive'         => false, // _x( 'cats', 'rkkr-plugin' ),
-			'exclude_from_search' => true,
+			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'rewrite'             => $rewrite,
 			'capability_type'     => 'post',
@@ -286,10 +287,15 @@ class Rkkr_Cpt_Cat {
 
 
 	public function set_custom_columns( $columns ) {
-		$columns['thumb'] = __( 'Thumbnail', 'rkkr-plugin' );
 		unset( $columns['date'] );
 
-		return $columns;
+		// stick a thumb before the title
+		$columns_out = array_slice( $columns, 0, 1, true ) +
+		           array( 'thumb' => __( 'Thumbnail', 'rkkr-plugin' ) ) +
+		           array_slice( $columns, 1, count( $columns ) - 1, true );
+
+
+		return $columns_out;
 	}
 
 
@@ -307,6 +313,159 @@ class Rkkr_Cpt_Cat {
 				break;
 
 		}
+	}
+
+
+	public function prepopulate_cat_taxonomies() {
+		$option_name = 'rkkr-prepulated-taxonomies';
+
+		$already_run = get_option( $option_name, false );
+
+		if ( $already_run ) {
+			return;
+		}
+
+
+		/*
+		 * rkkr_cat_breeds
+		 * based on petfinder http://api.petfinder.com/schemas/0.9/petfinder.xsd
+		 */
+
+		$cat_breeds = array(
+			'Abyssinian',
+			'American Curl',
+			'American Shorthair',
+			'American Wirehair',
+			'Applehead Siamese',
+			'Balinese',
+			'Bengal',
+			'Birman',
+			'Bobtail',
+			'Bombay',
+			'British Shorthair',
+			'Burmese',
+			'Burmilla',
+			'Calico',
+			'Canadian Hairless',
+			'Chartreux',
+			'Chausie',
+			'Chinchilla',
+			'Cornish Rex',
+			'Cymric',
+			'Devon Rex',
+			'Dilute Calico',
+			'Dilute Tortoiseshell',
+			'Domestic Long Hair',
+			'Domestic Long Hair - brown',
+			'Domestic Long Hair - buff',
+			'Domestic Long Hair - buff and white',
+			'Domestic Long Hair - gray and white',
+			'Domestic Long Hair - orange',
+			'Domestic Long Hair - orange and white',
+			'Domestic Long Hair-black',
+			'Domestic Long Hair-black and white',
+			'Domestic Long Hair-gray',
+			'Domestic Long Hair-white',
+			'Domestic Medium Hair',
+			'Domestic Medium Hair - brown',
+			'Domestic Medium Hair - buff',
+			'Domestic Medium Hair - buff and white',
+			'Domestic Medium Hair - gray and white',
+			'Domestic Medium Hair - orange and white',
+			'Domestic Medium Hair-black',
+			'Domestic Medium Hair-black and white',
+			'Domestic Medium Hair-gray',
+			'Domestic Medium Hair-orange',
+			'Domestic Medium Hair-white',
+			'Domestic Short Hair',
+			'Domestic Short Hair - brown',
+			'Domestic Short Hair - buff',
+			'Domestic Short Hair - buff and white',
+			'Domestic Short Hair - gray and white',
+			'Domestic Short Hair - orange and white',
+			'Domestic Short Hair-black',
+			'Domestic Short Hair-black and white',
+			'Domestic Short Hair-gray',
+			'Domestic Short Hair-mitted',
+			'Domestic Short Hair-orange',
+			'Domestic Short Hair-white',
+			'Egyptian Mau',
+			'Exotic Shorthair',
+			'Extra-Toes Cat (Hemingway Polydactyl)',
+			'Havana',
+			'Himalayan',
+			'Japanese Bobtail',
+			'Javanese',
+			'Korat',
+			'LaPerm',
+			'Maine Coon',
+			'Manx',
+			'Munchkin',
+			'Nebelung',
+			'Norwegian Forest Cat',
+			'Ocicat',
+			'Oriental Long Hair',
+			'Oriental Short Hair',
+			'Oriental Tabby',
+			'Persian',
+			'Pixie-Bob',
+			'Ragamuffin',
+			'Ragdoll',
+			'Russian Blue',
+			'Scottish Fold',
+			'Selkirk Rex',
+			'Siamese',
+			'Siberian',
+			'Silver',
+			'Singapura',
+			'Snowshoe',
+			'Somali',
+			'Sphynx (hairless cat)',
+			'Tabby',
+			'Tabby - black',
+			'Tabby - Brown',
+			'Tabby - buff',
+			'Tabby - Grey',
+			'Tabby - Orange',
+			'Tabby - white',
+			'Tiger',
+			'Tonkinese',
+			'Torbie',
+			'Tortoiseshell',
+			'Turkish Angora',
+			'Turkish Van',
+			'Tuxedo',
+		);
+
+		foreach ( $cat_breeds as $cat_breed ) {
+			wp_insert_term( $cat_breed, 'rkkr_cat_breeds' );
+
+		}
+
+		$cat_genders = array(
+			'Male',
+			'Female',
+			'Unknown',
+		);
+
+		foreach ( $cat_genders as $cat_gender ) {
+			wp_insert_term( $cat_gender, 'rkkr_cat_genders' );
+		}
+
+
+		$cat_ages = array(
+			'Baby',
+			'Young',
+			'Adult',
+			'Senior',
+		);
+
+		foreach ( $cat_ages as $cat_age ) {
+			wp_insert_term( $cat_age, 'rkkr_cat_ages' );
+		}
+
+
+		update_option( $option_name, true, true );
 	}
 
 
