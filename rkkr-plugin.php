@@ -47,3 +47,8 @@ $rkkr_cpt_cat->init();
 include_once 'modules/acf-helpers.php';
 $rkkr_acf_helpers = new Rkkr_Acf_Helpers();
 $rkkr_acf_helpers->init();
+
+
+
+// Shortcodes are auto-added within that
+include_once 'modules/shortcodes.php';
