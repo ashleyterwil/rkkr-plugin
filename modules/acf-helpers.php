@@ -14,7 +14,7 @@ class Rkkr_Acf_Helpers {
 	}
 
 	public function init() {
-		//		add_action( 'init', array( $this, 'register_option_pages' ) );
+				add_action( 'init', array( $this, 'register_option_pages' ) );
 
 		// https://www.advancedcustomfields.com/resources/local-json/
 		add_filter( 'acf/settings/save_json', array( $this, 'save_acf_json' ) );

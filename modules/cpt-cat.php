@@ -26,6 +26,11 @@ class Rkkr_Cpt_Cat {
 
 
 		add_action( 'init', array( $this, 'prepopulate_cat_taxonomies' ) );
+
+		// tell Divi about us
+
+		add_filter( 'et_builder_post_types', arraY( $this, 'add_cpt_to_divi' ) );
+
 	}
 
 
@@ -203,6 +208,263 @@ class Rkkr_Cpt_Cat {
 			'rewrite'           => array( 'slug' => _x( 'cat-ages', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
 		);
 		register_taxonomy( 'rkkr_cat_ages', array( self::$cpt ), $args );
+
+
+
+
+		$labels = array(
+			'name'                       => _x( 'Adoption Statuses', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Adoption Status', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Adoption Statuses', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Adoption Statuses', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Adoption Status', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Adoption Status:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Adoption Status Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Adoption Status', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Adoption Status', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Adoption Status', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Adoption Status', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Adoption Statuses', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Adoption Statuses', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Adoption Statuses', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Adoption Statuses', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Adoption Statuses', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Adoption Statuses list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Adoption Statuses list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-adoption-statuses', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_adoption_statuses', array( self::$cpt ), $args );
+
+
+		$labels = array(
+			'name'                       => _x( 'Cat Sizes', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Cat Size', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Cat Sizes', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Cat Sizes', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Cat Size', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Cat Size:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Cat Size Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Cat Size', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Cat Size', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Cat Size', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Cat Size', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Cat Sizes', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Cat Sizes', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Cat Sizes', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Cat Sizes', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Cat Sizes', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Cat Sizes list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Cat Sizes list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-sizes', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_sizes', array( self::$cpt ), $args );
+
+
+
+
+
+
+
+		$labels = array(
+			'name'                       => _x( 'Coat Lengths', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Coat Length', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Coat Lengths', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Coat Lengths', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Coat Length', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Coat Length:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Coat Length Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Coat Length', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Coat Length', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Coat Length', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Coat Length', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Coat Lengths', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Coat Lengths', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Coat Lengths', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Coat Lengths', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Coat Lengths', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Coat Lengths list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Coat Lengths list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-coat-lengths', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_coat_lengths', array( self::$cpt ), $args );
+
+
+
+
+
+
+		$labels = array(
+			'name'                       => _x( 'Personalities', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Personality', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Personalities', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Personalities', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Personality', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Personality:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Personality Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Personality', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Personality', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Personality', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Personality', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Personalities', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Personalities', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Personalities', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Personalities', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Personalities', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Personalities list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Personalities list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-personalities', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_personalities', array( self::$cpt ), $args );
+
+
+
+
+		$labels = array(
+			'name'                       => _x( 'Spayed/Neutered', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Spayed/Neutered', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Spayed/Neutered', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Spayed/Neutered', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Spayed/Neutered', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Spayed/Neutered:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Spayed/Neutered Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Spayed/Neutered', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Spayed/Neutered', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Spayed/Neutered', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Spayed/Neutered', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Spayed/Neutered', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Spayed/Neutered', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Spayed/Neutered', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Spayed/Neutered', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Spayed/Neutered', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Spayed/Neutered list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Spayed/Neutered list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-spayed', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_spayed', array( self::$cpt ), $args );
+
+		$labels = array(
+			'name'                       => _x( 'Current on vaccinations', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Current on vaccinations', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Current on vaccinations', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Current on vaccinations', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Current on vaccinations', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Current on vaccinations:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Current on vaccinations Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Current on vaccinations', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Current on vaccinations', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Current on vaccinations', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Current on vaccinations', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Current on vaccinations', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Current on vaccinations', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Current on vaccinations', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Current on vaccinations', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Current on vaccinations', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Current on vaccinations list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Current on vaccinations list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-vaccinations', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_vaccinations', array( self::$cpt ), $args );
+
+
+		$labels = array(
+			'name'                       => _x( 'Special needs', 'Taxonomy General Name', 'rkkr-plugin' ),
+			'singular_name'              => _x( 'Special needs', 'Taxonomy Singular Name', 'rkkr-plugin' ),
+			'menu_name'                  => __( 'Special needs', 'rkkr-plugin' ),
+			'all_items'                  => __( 'All Special needs', 'rkkr-plugin' ),
+			'parent_item'                => __( 'Parent Special needs', 'rkkr-plugin' ),
+			'parent_item_colon'          => __( 'Parent Special needs:', 'rkkr-plugin' ),
+			'new_item_name'              => __( 'New Special needs Name', 'rkkr-plugin' ),
+			'add_new_item'               => __( 'Add New Special needs', 'rkkr-plugin' ),
+			'edit_item'                  => __( 'Edit Special needs', 'rkkr-plugin' ),
+			'update_item'                => __( 'Update Special needs', 'rkkr-plugin' ),
+			'view_item'                  => __( 'View Special needs', 'rkkr-plugin' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'rkkr-plugin' ),
+			'add_or_remove_items'        => __( 'Add or remove Special needs', 'rkkr-plugin' ),
+			'choose_from_most_used'      => __( 'Choose from the most used Special needs', 'rkkr-plugin' ),
+			'popular_items'              => __( 'Popular Special needs', 'rkkr-plugin' ),
+			'search_items'               => __( 'Search Special needs', 'rkkr-plugin' ),
+			'not_found'                  => __( 'Not Found', 'rkkr-plugin' ),
+			'no_terms'                   => __( 'No Special needs', 'rkkr-plugin' ),
+			'items_list'                 => __( 'Special needs list', 'rkkr-plugin' ),
+			'items_list_navigation'      => __( 'Special needs list navigation', 'rkkr-plugin' ),
+		);
+		$args   = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'public'            => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'show_in_nav_menus' => true,
+			'show_tagcloud'     => true,
+			'rewrite'           => array( 'slug' => _x( 'cat-special-needs', 'Slug for the Custom taxonomy URL', 'rkkr-plugin' ) ),
+		);
+		register_taxonomy( 'rkkr_cat_special_needs', array( self::$cpt ), $args );
 	}
 
 
@@ -260,7 +522,7 @@ class Rkkr_Cpt_Cat {
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
-			'has_archive'         => false, // _x( 'cats', 'rkkr-plugin' ),
+			'has_archive'         => true, // _x( 'cats', 'rkkr-plugin' ),
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'rewrite'             => $rewrite,
@@ -268,6 +530,15 @@ class Rkkr_Cpt_Cat {
 			'taxonomies'          => array(),
 		);
 		register_post_type( self::$cpt, $args );
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 
@@ -291,8 +562,8 @@ class Rkkr_Cpt_Cat {
 
 		// stick a thumb before the title
 		$columns_out = array_slice( $columns, 0, 1, true ) +
-		           array( 'thumb' => __( 'Thumbnail', 'rkkr-plugin' ) ) +
-		           array_slice( $columns, 1, count( $columns ) - 1, true );
+		               array( 'thumb' => __( 'Thumbnail', 'rkkr-plugin' ) ) +
+		               array_slice( $columns, 1, count( $columns ) - 1, true );
 
 
 		return $columns_out;
@@ -466,6 +737,13 @@ class Rkkr_Cpt_Cat {
 
 
 		update_option( $option_name, true, true );
+	}
+
+	public function add_cpt_to_divi( $post_types ) {
+		$post_types[] = self::$cpt;
+
+		return $post_types;
+
 	}
 
 
